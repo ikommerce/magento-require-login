@@ -13,6 +13,9 @@ class Bubble_RequireLogin_Model_Customer_Observer
         $session = Mage::getSingleton('customer/session');
 
         if (!$session->isLoggedIn() && $helper->isLoginRequired()) {
+        	/****Ikom Delete cookie****/
+        	Mage::getModel('core/cookie')->delete();
+
             $controllerAction = $observer->getEvent()->getControllerAction();
             /* @var $controllerAction Mage_Core_Controller_Front_Action */
             $requestString = $controllerAction->getRequest()->getRequestString();
